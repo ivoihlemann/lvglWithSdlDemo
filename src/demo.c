@@ -18,15 +18,32 @@ static void demo_release(int signal) {
     demo_status = 0;
 }
 
+static void btn_event_cb(lv_event_t * e)
+{
+    // from https://docs.lvgl.io/master/examples.html
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t * btn = lv_event_get_target(e);
+    if(code == LV_EVENT_CLICKED) {
+        static uint8_t cnt = 0;
+        cnt++;
+
+        /*Get the first child of the button which is the label and change its text*/
+        lv_obj_t * label = lv_obj_get_child(btn, 0);
+        lv_label_set_text_fmt(label, "clicked: %d", cnt);
+    }
+}
+
 static void create_ui(void) {
     lv_obj_t *btn = lv_btn_create(lv_scr_act());
     lv_obj_t *lbl = lv_label_create(btn);
     lv_obj_set_style_text_font(lbl, &lv_font_simsun_16_cjk, 0);
 
-    lv_label_set_text(lbl, "Hello world! 歡迎");
+    lv_label_set_text(lbl, "Hello world!");
 
     lv_obj_center(lbl);
     lv_obj_center(btn);
+
+    lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, NULL);           /*Assign a callback to the button*/
 }
 
 static void driver_init(void) {
