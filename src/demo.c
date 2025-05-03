@@ -33,9 +33,14 @@ static void btn_event_cb(lv_event_t *e) {
 }
 
 static void create_ui(void) {
+  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
+  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000),
+                              LV_PART_MAIN);
+
   lv_obj_t *btn = lv_btn_create(lv_scr_act());
   lv_obj_t *lbl = lv_label_create(btn);
-  lv_obj_set_style_text_font(lbl, &lv_font_simsun_16_cjk, 0);
+  //   lv_obj_set_style_text_font(lbl, &lv_font_simsun_16_cjk, 0);
+  lv_obj_set_style_bg_color(btn, lv_color_black(), LV_PART_MAIN);
 
   lv_label_set_text(lbl, "Hello world!");
 
