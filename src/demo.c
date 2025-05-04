@@ -39,8 +39,23 @@ static void create_ui(void) {
 
   lv_obj_t *btn = lv_btn_create(lv_scr_act());
   lv_obj_t *lbl = lv_label_create(btn);
-  //   lv_obj_set_style_text_font(lbl, &lv_font_simsun_16_cjk, 0);
   lv_obj_set_style_bg_color(btn, lv_color_black(), LV_PART_MAIN);
+
+  // style
+  static lv_style_t style;
+  lv_style_init(&style);
+  lv_style_set_radius(&style, 0);
+  lv_style_set_bg_opa(&style, LV_OPA_COVER);
+  lv_style_set_bg_color(&style, lv_color_white());
+  lv_style_set_outline_width(&style, 2);
+  lv_style_set_outline_color(&style, lv_color_black());
+  lv_style_set_outline_pad(&style, 8);
+  lv_style_set_shadow_width(&style, 6);
+  lv_style_set_shadow_color(&style, lv_color_black());
+  lv_style_set_shadow_ofs_x(&style, 5);
+  lv_style_set_shadow_ofs_y(&style, 5);
+  lv_obj_add_style(btn, &style, LV_PART_MAIN);
+  // style end
 
   lv_label_set_text(lbl, "Hello world!");
 
